@@ -1,0 +1,147 @@
+@font-face {
+  font-family: rinterland;
+  src: url(../font/Buycat.ttf);
+}
+
+/* background */
+.bg_blue {
+  background: #4f98ca;
+}
+.bg_gray {
+  background: #e9edf9;
+}
+
+/* header */
+.header .webix_layout_toolbar {
+  box-shadow: 5px 5px 12px yellow !important;
+}
+.header_title .webix_el_box {
+  color: #effffb !important;
+  font-size: 32px !important;
+  margin-left: 20px;
+  font-family: rinterland !important;
+  font-weight: 600;
+}
+.icon_hamburger .webix_icon_button .webix_icon {
+  margin-right: 8px;
+  font-size: 28px;
+  color: #effffb;
+}
+.icon_hamburger .webix_icon_button:hover:before {
+  background: none;
+}
+
+/* sidebar */
+.sidebar_custom .webix_sidebar_icon {
+  margin-left: 5px !important;
+  margin-right: 18px !important;
+  font-size: 32px;
+}
+.sidebar_custom .webix_tree_item {
+  font-size: 16px;
+  padding: 10px;
+}
+.webix_sidebar .webix_tree_item,
+.webix_sidebar .webix_tree_branch_1 > .webix_tree_item {
+  color: #272727;
+}
+.webix_sidebar .webix_sidebar_icon {
+  color: #272727;
+}
+.sidebar_custom {
+  background: #effffb;
+}
+.webix_sidebar .webix_tree_item:hover {
+  background: #ffffff;
+}
+.webix_sidebar .webix_tree_item.webix_selected,
+.webix_sidebar .webix_tree_item.webix_sidebar_selected {
+  background: none;
+}
+.webix_sidebar.webix_sidebar_left .webix_tree_item.webix_selected {
+  box-shadow: inset 3px 0px #4f98ca;
+}
+
+/* .webix_view
+  .webix_window
+  .webix_popup
+  .webix_sidebar_popup
+  .webix_sidebar_popup_left
+  .sidebar_custom {
+  display: none;
+} */
+.webix_sidebar_popup {
+  display: none !important;
+}
+/* .webix_win_body .webix_view .webix_sidebar_popup_title {
+  top: 200px;
+  height: 100px;
+} */
+
+/*  Header menu */
+.text_right {
+  text-align: right;
+}
+.text_center {
+  text-align: center;
+}
+.custom_header_menu .webix_el_box {
+  font-size: 18px;
+  margin-left: 30px;
+}
+.custom_header_time .webix_template {
+  font-size: 16px;
+  padding-top: 22px;
+  margin-right: 80px;
+}
+
+/* form */
+.custom_form {
+  max-width: 380px;
+}
+
+.custom_total .webix_template {
+  padding-top: 30px;
+  font-size: 48px;
+}
+
+@media print {
+  .webix_header_cell,
+  .webix_footer_cell,
+  .webix_cell {
+    color: #000000 !important;
+  }
+}
+
+.smooth .webix_accordionitem {
+  transition: height 0.5s;
+}
+
+/* style list tabel transaksi */
+table {
+  width: 100%;
+}
+td {
+  padding: 0;
+}
+.text_tgl_trx {
+  font-size: 20px;
+  font-weight: bold;
+}
+.text_bold {
+  font-weight: bold;
+}
+.mdi-arrow-right {
+  font-size: 18px;
+}
+.footer_total_label {
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: right;
+}
+.footer_total_value {
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: right;
+  font-weight: bold;
+}

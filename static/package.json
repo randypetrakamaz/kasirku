@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "webix": "^10.2.0"
+  }
+}
