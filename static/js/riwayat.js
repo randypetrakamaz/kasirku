@@ -138,6 +138,8 @@ function getDataRiwayat(){
             month_revenue += item["total"]
         });
 
+        listDataTrx.reverse();
+
         $$("list_transaction").parse(listDataTrx)
         $$("display_revenue").setValues({month_revenue: formatCurrency(month_revenue)})
         $$("display_profit").setValues({month_profit: formatCurrency(month_profit)})
@@ -146,15 +148,17 @@ function getDataRiwayat(){
 
 function filterDataRiwayat(selectedDate) { 
     let transactionList = $$("list_transaction")  
-    let filteredData = transactionList.serialize();
     let month_profit = 0;
     let month_revenue = 0;
 
     webix.extend(transactionList, webix.OverlayBox)
     transactionList.hideOverlay();
+    $$("btn_close").hide()
+    $$("btn_printer").hide()
 
     if (!selectedDate) {
-        getDataRiwayat();
+        transactionList.clearAll();
+        getDataRiwayat(); 
         return true;
     }
 
@@ -165,26 +169,55 @@ function filterDataRiwayat(selectedDate) {
         return dateObjectList.getTime() === selectedDate.getTime();
     })
 
+    let filteredData = transactionList.serialize();
     if(transactionList.count() === 0) {
         transactionList.showOverlay("Tidak ada data");
+    } else {
+        filteredData.forEach(function(item){
+            month_profit += Number(item.profit.replace(/\./g, ''));
+            month_revenue += Number(item.revenue.replace(/\./g, ''));
+        });
     }
-
-    filteredData.forEach(function(item){
-        month_profit += Number(item.profit.replace(/\./g, ''));
-        month_revenue += Number(item.revenue.replace(/\./g, ''));
-    });
 
     $$("display_revenue").setValues({month_revenue: formatCurrency(month_revenue)});
     $$("display_profit").setValues({month_profit: formatCurrency(month_profit)});
+
     $$("receipt_transaction").define("template", `<p style="text-align: center">Tidak ada data</p>`);
     $$("receipt_transaction").refresh();
 }
 
 function searchData(value) {
     let text = value.toString().toLowerCase();
-    $$("list_transaction").filter(function(obj) {
+    let transactionList = $$("list_transaction")
+
+    transactionList.filter(function(obj) {
         return obj.no_transaksi.toString().toLowerCase().indexOf(text) != -1;
     }) 
+
+    let filteredData = transactionList.serialize();
+    let month_profit = 0
+    let month_revenue = 0
+    
+    webix.extend(transactionList, webix.OverlayBox)
+    transactionList.hideOverlay();
+
+    $$("btn_close").hide()  
+    $$("btn_printer").hide()
+    $$("receipt_transaction").define("template", `<p style="text-align: center">Tidak ada data</p>`);
+    $$("receipt_transaction").refresh();
+
+    if(transactionList.count() === 0) {
+        transactionList.showOverlay("Tidak ada data");
+    } else {
+        filteredData.forEach(function(item){
+            month_profit += Number(item.profit.replace(/\./g, ''));
+            month_revenue += Number(item.revenue.replace(/\./g, ''));
+        });
+    }
+
+    $$("display_revenue").setValues({month_revenue: formatCurrency(month_revenue)});
+    $$("display_profit").setValues({month_profit: formatCurrency(month_profit)});
+
 }
 
 function showReceiptView(data){    
@@ -440,8 +473,8 @@ webix.ready(function(){
                                                     {
                                                         height: 68, 
                                                         cols: [
-                                                            {id: "display_revenue", template:"<div class='footer_total_label'>Pendapatan Total Bulanan</div><div class='footer_total_value'>#month_revenue#</div>"},
-                                                            {id: "display_profit", template:"<div class='footer_total_label'>Laba Total Bulanan</div><div class='footer_total_value'>#month_profit#</div>"}
+                                                            {id: "display_revenue", template:"<div class='footer_total_label'>Total Pendapatan</div><div class='footer_total_value'>#month_revenue#</div>"},
+                                                            {id: "display_profit", template:"<div class='footer_total_label'>Total Laba</div><div class='footer_total_value'>#month_profit#</div>"}
                                                         ]
                                                     }
                                                 ]

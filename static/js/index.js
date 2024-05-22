@@ -391,8 +391,8 @@ function saveToDatabase(no, total, bayar, kembalian){
 
         if (result.status === 'success') {
             webix.message({type: "success", text: message});
-            cancelTransaction();
             printReceipt(no_transaksi, pay, change, totalBuy);
+            cancelTransaction();
         } else {
             webix.alert({
                 type:"alert-error",

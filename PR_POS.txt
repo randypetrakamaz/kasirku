@@ -1,0 +1,4 @@
+- bug ketika clear date search, maka jadi double data (done)
+- ketika klik receipt lalu klik filter maka toolbar masih ada
+- ketika filter lalu search data jumlah pendapatan dan laba masih tidak sesuai (done)
+- ketika tidak ada data, showoverlay tidak ada

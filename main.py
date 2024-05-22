@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -132,13 +132,12 @@ def tambah_riwayat():
     try:
         data = request.json
         items = data['items']
-
+        
         for item in items:
             barang = collection_barang.find_one({'kode_barang': item['kode_barang']})
             if barang:
                 harga_beli = barang['harga_beli']
                 item['harga_beli'] = harga_beli
-                
                 # Kurangi stok barang
                 collection_barang.update_one(
                     {'kode_barang': item['kode_barang']},
@@ -148,7 +147,6 @@ def tambah_riwayat():
                 del item['kode_barang']
             else:
                 return jsonify({'status': 'error', 'message': 'Data Barang tidak ditemukan'})
-
 
         new_data_transaksi = {
             'no_transaksi': data['no_transaksi'],
