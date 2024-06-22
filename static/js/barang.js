@@ -80,6 +80,7 @@ let modeAksiForm = "tambah"
 let windowTambahData = webix.ui({
     id: "windowData",
     view: "window",
+    
     height: 380,
     width: 400,
     padding: -50,
@@ -363,6 +364,7 @@ webix.ready(function() {
                                                 placeholder:"Kode dan nama barang", 
                                                 labelPosition: "top", 
                                                 maxWidth: 200,
+                                                minWidth: 180,
                                                 on: {
                                                     onTimedKeyPress: function(){filterData(this.getValue())}
                                                 }
@@ -375,6 +377,7 @@ webix.ready(function() {
                                                 placeholder:"Stok kurang dari", 
                                                 labelPosition: "top", 
                                                 maxWidth: 150, 
+                                                minWidth: 145,
                                                 on: {
                                                     onEnter: function(){filterStok(this.getValue())}
                                                 },
@@ -478,5 +481,6 @@ webix.ready(function() {
     })     
 
     $$("sidebar_menu").select("barang");  
+    responsiveSidebar();
     webix.message.expire = 1800;
 })

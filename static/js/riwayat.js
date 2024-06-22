@@ -533,7 +533,7 @@ webix.ready(function(){
                 ]
             }
         ]
-    });
+    })
 
     $$("sidebar_menu").select("riwayat");
     responsiveSidebar();
