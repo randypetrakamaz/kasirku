@@ -347,6 +347,7 @@ webix.ready(function() {
                                     {id:"current_time", template: showDateTime, type: "clean", css: "text_right custom_header_time"}
                                 ]
                             },
+                            // ubah dari sini
                             {
                                 rows: [
                                     {
@@ -356,91 +357,103 @@ webix.ready(function() {
                                         paddingX: 10,
                                         paddingY: 15,
                                         margin: 15,
-                                        cols: [
+                                        rows: [
                                             {
-                                                id:"filter_table", 
-                                                view:"text",
-                                                label:"Cari Data",
-                                                placeholder:"Kode dan nama barang", 
-                                                labelPosition: "top", 
-                                                maxWidth: 200,
-                                                minWidth: 180,
-                                                on: {
-                                                    onTimedKeyPress: function(){filterData(this.getValue())}
-                                                }
-                                            },
-                                            {
-                                                id:"filter_stok", 
-                                                view:"text", 
-                                                type: "number", 
-                                                label: "Filter Stok", 
-                                                placeholder:"Stok kurang dari", 
-                                                labelPosition: "top", 
-                                                maxWidth: 150, 
-                                                minWidth: 145,
-                                                on: {
-                                                    onEnter: function(){filterStok(this.getValue())}
-                                                },
-                                            },
-                                            {},
-                                            {
-                                                maxHeight: 90, 
-                                                margin: 10, 
+                                                responsive: "toolbar_filter",
                                                 cols: [
                                                     {
-                                                        rows: [
-                                                            {},
-                                                            { 
-                                                                id: "add_btn",
-                                                                view:"button", 
-                                                                type:"icon", 
-                                                                icon: "mdi mdi-plus", 
-                                                                label: "Tambah", 
-                                                                width: 100, 
-                                                                height: 50,
-                                                                align: "center", 
-                                                                css: "webix_primary", 
-                                                                click: addDataBtn
+                                                        minWidth: 300,
+                                                        cols: [
+                                                            {
+                                                                id:"filter_table", 
+                                                                view:"text",
+                                                                label:"Cari Data",
+                                                                placeholder:"Kode dan nama barang", 
+                                                                labelPosition: "top", 
+                                                                maxWidth: 200,
+                                                                minWidth: 180,
+                                                                on: {
+                                                                    onTimedKeyPress: function(){filterData(this.getValue())}
+                                                                }
                                                             },
+                                                            {
+                                                                id:"filter_stok", 
+                                                                view:"text", 
+                                                                type: "number", 
+                                                                label: "Filter Stok", 
+                                                                placeholder:"Stok kurang dari", 
+                                                                labelPosition: "top", 
+                                                                maxWidth: 150, 
+                                                                minWidth: 145,
+                                                                on: {
+                                                                    onEnter: function(){filterStok(this.getValue())}
+                                                                },
+                                                            },
+                                                            {}
                                                         ]
                                                     },
                                                     {
-                                                        rows: [
-                                                            {},
-                                                            { 
-                                                                id: "edit_btn",
-                                                                view:"button", 
-                                                                type:"icon", 
-                                                                icon: "mdi mdi-pencil", 
-                                                                label: "Ubah", 
-                                                                value: "edit",
-                                                                width: 100, 
-                                                                height: 50,
-                                                                align: "center", 
-                                                                css: "webix_secondary", 
-                                                                click: editDataBtn
+                                                        minWidth: 300,
+                                                        maxWidth: 800,
+                                                        maxHeight: 90, 
+                                                        margin: 10, 
+                                                        cols: [
+                                                            {
+                                                                rows: [
+                                                                    {},
+                                                                    { 
+                                                                        id: "add_btn",
+                                                                        view:"button", 
+                                                                        type:"icon", 
+                                                                        icon: "mdi mdi-plus", 
+                                                                        label: "Tambah", 
+                                                                        width: 100, 
+                                                                        height: 50,
+                                                                        align: "center", 
+                                                                        css: "webix_primary", 
+                                                                        click: addDataBtn
+                                                                    },
+                                                                ]
+                                                            },
+                                                            {
+                                                                rows: [
+                                                                    {},
+                                                                    { 
+                                                                        id: "edit_btn",
+                                                                        view:"button", 
+                                                                        type:"icon", 
+                                                                        icon: "mdi mdi-pencil", 
+                                                                        label: "Ubah", 
+                                                                        value: "edit",
+                                                                        width: 100, 
+                                                                        height: 50,
+                                                                        align: "center", 
+                                                                        css: "webix_secondary", 
+                                                                        click: editDataBtn
+                                                                    },
+                                                                ]
+                                                            },
+                                                            {
+                                                                rows: [
+                                                                    {},
+                                                                    { 
+                                                                        id: "delete_btn",
+                                                                        view:"button", 
+                                                                        type:"icon", 
+                                                                        icon: "mdi mdi-delete", 
+                                                                        label: "Hapus", 
+                                                                        width: 100, 
+                                                                        height: 50,
+                                                                        align: "center", 
+                                                                        css: "webix_danger", 
+                                                                        click: deleteDataBtn
+                                                                    },
+                                                                ]
                                                             },
                                                         ]
-                                                    },
-                                                    {
-                                                        rows: [
-                                                            {},
-                                                            { 
-                                                                id: "delete_btn",
-                                                                view:"button", 
-                                                                type:"icon", 
-                                                                icon: "mdi mdi-delete", 
-                                                                label: "Hapus", 
-                                                                width: 100, 
-                                                                height: 50,
-                                                                align: "center", 
-                                                                css: "webix_danger", 
-                                                                click: deleteDataBtn
-                                                            },
-                                                        ]
-                                                    },
+                                                    }
                                                 ]
-                                            }
+                                            },
                                         ]
                                     },
                                     {

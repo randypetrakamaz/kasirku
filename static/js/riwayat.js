@@ -395,11 +395,15 @@ webix.ready(function(){
                             },
                             // =====> Content <=====
                             {
+                                id: "content",
                                 rows: [
                                     {
                                         // =====> Toolbar and Display Receipt
+                                        responsive: "content",
+                                        minWidth: 800,
                                         cols: [
                                             {
+                                                minWidth: 380,
                                                 // =====> Toolbar and Data Transaction <=====
                                                 rows: [
                                                     // =====> Toolbar <=====
@@ -421,6 +425,7 @@ webix.ready(function(){
                                                                 labelPosition: "top", 
                                                                 gravity: 2, 
                                                                 editable: true,
+                                                                minWidth: 150,
                                                                 on: {                                            
                                                                     onChange: function() {filterDataRiwayat(this.getValue())}
                                                                 }
@@ -432,6 +437,7 @@ webix.ready(function(){
                                                                 name:"label", 
                                                                 labelPosition: "top", 
                                                                 gravity: 3,
+                                                                minWidth: 150,
                                                                 on: {
                                                                     // onTimedKeyPress: function(){searchData(this.getValue())}
                                                                     onEnter: function(){searchData(this.getValue())}
@@ -481,6 +487,8 @@ webix.ready(function(){
                                             },
                                             { view:"resizer" },
                                             {
+                                                minWidth: 400,
+                                                maxWidth: 800,
                                                 id: "detail_layout",
                                                 view: "layout",
                                                 type: "clean",
