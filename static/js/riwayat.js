@@ -150,24 +150,32 @@ function filterDataRiwayat(selectedDate) {
     let transactionList = $$("list_transaction")  
     let month_profit = 0;
     let month_revenue = 0;
+    let text = $$("search_input").getValue().toString().toLowerCase();
 
     webix.extend(transactionList, webix.OverlayBox)
     transactionList.hideOverlay();
-    $$("btn_close").hide()
-    $$("btn_printer").hide()
+    $$("btn_close").hide();
+    $$("btn_printer").hide();
 
-    if (!selectedDate) {
-        transactionList.clearAll();
-        getDataRiwayat(); 
-        return true;
-    }
 
     transactionList.filter(function(obj) {
-        let selectedDateList = obj.month_year;
-        let dateObjectList = new Date(selectedDateList);
-        dateObjectList.setDate(1);
-        return dateObjectList.getTime() === selectedDate.getTime();
+        if (selectedDate) {
+            let selectedDateList = obj.month_year;
+            let dateObjectList = new Date(selectedDateList);
+            dateObjectList.setDate(1);
+
+            if (text !== "") {
+                return dateObjectList.getTime() === selectedDate.getTime() && obj.no_transaksi.toString().toLowerCase().indexOf(text) === 0;
+            } else {
+                return dateObjectList.getTime() === selectedDate.getTime();
+            }
+        } else if (!selectedDate && text !== "" ) {
+            return obj.no_transaksi.toString().toLowerCase().indexOf(text) === 0;
+        } else {
+            return true;
+        }
     })
+
 
     let filteredData = transactionList.serialize();
     if(transactionList.count() === 0) {
@@ -189,10 +197,27 @@ function filterDataRiwayat(selectedDate) {
 function searchData(value) {
     let text = value.toString().toLowerCase();
     let transactionList = $$("list_transaction")
+    let selectedDate = $$("month_filter").getValue();
 
     transactionList.filter(function(obj) {
-        return obj.no_transaksi.toString().toLowerCase().indexOf(text) != -1;
-    }) 
+        if (text !== "") {
+            if(selectedDate) {
+                let selectedDateList = obj.month_year;
+                let dateObjectList = new Date(selectedDateList);
+                dateObjectList.setDate(1);
+                return obj.no_transaksi.toString().toLowerCase().indexOf(text) === 0 && dateObjectList.getTime() === selectedDate.getTime();
+            } else {
+                return obj.no_transaksi.toString().toLowerCase().indexOf(text) === 0;
+            }
+        } else if (text == "" && selectedDate) {
+            let selectedDateList = obj.month_year;
+            let dateObjectList = new Date(selectedDateList);
+            dateObjectList.setDate(1);
+            return dateObjectList.getTime() === selectedDate.getTime();
+        } else {
+            return true
+        }
+    })
 
     let filteredData = transactionList.serialize();
     let month_profit = 0

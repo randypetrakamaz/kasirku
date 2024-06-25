@@ -284,20 +284,59 @@ function deleteDataBtn() {
 
 function filterStok(stok) {
     let inputStok = stok;
-    $$("table_items").filter(function(obj){
-        if(inputStok === "" || inputStok === null){
-            return obj;
-        }            
-        return obj.stok < inputStok;
+    let inputText = $$("filter_table").getValue().toString().toLowerCase();
+    let tabelBarang = $$("table_items");
+
+    tabelBarang.filter(function(obj){
+        if (inputStok !== "") {
+            if (inputText !== "") {
+                let filter = [obj.nama, obj.kode_barang].join("|");
+                return filter.toString().toLowerCase().indexOf(inputText) != -1 && obj.stok < inputStok;
+            } else {
+                return obj.stok < inputStok
+            }
+        } else if (inputStok == "" && inputText != "") {
+            let filter = [obj.nama, obj.kode_barang].join("|");
+            return filter.toString().toLowerCase().indexOf(inputText) != -1;
+        } else {
+            return true;
+        }
     });
+
+    webix.extend(tabelBarang, webix.OverlayBox);
+    tabelBarang.hideOverlay();
+
+    if(tabelBarang.count() === 0) {
+        tabelBarang.showOverlay("Tidak ada data");
+    }
 }
 
 function filterData(data) {
     let text = data.toString().toLowerCase();
-    $$("table_items").filter(function(obj){
-        let filter = [obj.nama, obj.kode_barang].join("|");
-        return filter.toString().toLowerCase().indexOf(text) != -1;
+    let inputStok = $$("filter_stok").getValue();
+    let tabelBarang = $$("table_items");
+    
+    tabelBarang.filter(function(obj){
+        if (text !== "") {
+            let filter = [obj.nama, obj.kode_barang].join("|");
+            if (inputStok != "") {
+                return filter.toString().toLowerCase().indexOf(text) != -1 && obj.stok < inputStok;
+            } else {
+                return filter.toString().toLowerCase().indexOf(text) != -1;
+            }
+        } else if(text == "" && inputStok != "") {
+            return obj.stok < inputStok
+        } else {
+            return true;
+        }
     });
+
+    webix.extend(tabelBarang, webix.OverlayBox)
+    tabelBarang.hideOverlay();
+
+    if(tabelBarang.count() === 0) {
+        tabelBarang.showOverlay("Tidak ada data");
+    }
 }
 
 
@@ -373,7 +412,8 @@ webix.ready(function() {
                                                                 maxWidth: 200,
                                                                 minWidth: 180,
                                                                 on: {
-                                                                    onTimedKeyPress: function(){filterData(this.getValue())}
+                                                                    // onTimedKeyPress: function(){filterData(this.getValue())}
+                                                                    onEnter: function(){filterData(this.getValue())}
                                                                 }
                                                             },
                                                             {
@@ -387,6 +427,7 @@ webix.ready(function() {
                                                                 minWidth: 145,
                                                                 on: {
                                                                     onEnter: function(){filterStok(this.getValue())}
+                                                                    // onTimedKeyPress: function(){filterStok(this.getValue())}
                                                                 },
                                                             }
                                                         ]
