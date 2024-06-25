@@ -388,8 +388,7 @@ webix.ready(function() {
                                                                 on: {
                                                                     onEnter: function(){filterStok(this.getValue())}
                                                                 },
-                                                            },
-                                                            {}
+                                                            }
                                                         ]
                                                     },
                                                     {
