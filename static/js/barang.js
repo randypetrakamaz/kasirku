@@ -398,6 +398,7 @@ webix.ready(function() {
                                                         maxHeight: 90, 
                                                         margin: 10, 
                                                         cols: [
+                                                            {id: "space"},
                                                             {
                                                                 rows: [
                                                                     {},
@@ -429,7 +430,7 @@ webix.ready(function() {
                                                                         height: 50,
                                                                         align: "center", 
                                                                         css: "webix_secondary", 
-                                                                        click: editDataBtn
+                                                                        click: editDataBtn,
                                                                     },
                                                                 ]
                                                             },
@@ -446,7 +447,7 @@ webix.ready(function() {
                                                                         height: 50,
                                                                         align: "center", 
                                                                         css: "webix_danger", 
-                                                                        click: deleteDataBtn
+                                                                        click: deleteDataBtn,
                                                                     },
                                                                 ]
                                                             },
@@ -491,7 +492,7 @@ webix.ready(function() {
                 ]
             }
         ]
-    })     
+    })       
 
     $$("sidebar_menu").select("barang");  
     responsiveSidebar();

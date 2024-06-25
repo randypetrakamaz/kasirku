@@ -108,6 +108,8 @@ function addData(){
             webix.ajax().get("/get-barang",  function(text, data) {
                 let responseData = data.json()["data"];
                 let statusFindData = false
+                let jumlahStok = 0
+
                 for(let data of responseData){
                     if(data.kode_barang == kodeBarang && data.stok >= stokBarang){
                         let item = {
@@ -121,10 +123,14 @@ function addData(){
                         statusFindData = true;
                         break;
                     }
+
+                    if(data.kode_barang == kodeBarang) {
+                        jumlahStok = data.stok
+                    }
                 }
 
                 if(!statusFindData) {
-                    webix.message({type: "error", text: "Jumlah barang melebihi stok!"});
+                    webix.message({type: "error", text: `Jumlah barang melebihi stok! <br>Jumlah barang: ${jumlahStok}`});
                 }
             })
         }
