@@ -398,7 +398,7 @@ webix.ready(function() {
                                                         maxHeight: 90, 
                                                         margin: 10, 
                                                         cols: [
-                                                            {id: "space"},
+                                                            {},
                                                             {
                                                                 rows: [
                                                                     {},
