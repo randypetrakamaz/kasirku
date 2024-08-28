@@ -596,7 +596,7 @@ webix.ready(function(){
                         ]
                     }
                 ]
-            },
+            }
         ]
     })
 

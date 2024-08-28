@@ -342,7 +342,7 @@ function filterData(data) {
 
 
 webix.ready(function() {
-    webix.ui.fullScreen();
+    // webix.ui.fullScreen();
     webix.ui({
         rows: [
             // =====> Header <=====
@@ -391,7 +391,7 @@ webix.ready(function() {
                                 rows: [
                                     {
                                         id: "toolbar_filter",
-                                        view: "toolbar",
+                                        view: "toolbar",                      
                                         maxHeight: 50,
                                         paddingX: 10,
                                         paddingY: 15,
@@ -409,7 +409,6 @@ webix.ready(function() {
                                                                 label:"Cari Data",
                                                                 placeholder:"Kode dan nama barang", 
                                                                 labelPosition: "top", 
-                                                                maxWidth: 200,
                                                                 minWidth: 180,
                                                                 on: {
                                                                     // onTimedKeyPress: function(){filterData(this.getValue())}
@@ -423,7 +422,6 @@ webix.ready(function() {
                                                                 label: "Filter Stok", 
                                                                 placeholder:"Stok kurang dari", 
                                                                 labelPosition: "top", 
-                                                                maxWidth: 150, 
                                                                 minWidth: 145,
                                                                 on: {
                                                                     onEnter: function(){filterStok(this.getValue())}
@@ -434,7 +432,6 @@ webix.ready(function() {
                                                     },
                                                     {
                                                         minWidth: 300,
-                                                        maxWidth: 800,
                                                         maxHeight: 90, 
                                                         margin: 10, 
                                                         cols: [
@@ -503,7 +500,7 @@ webix.ready(function() {
                                         css: "webix_header_border webix_data_border",
                                         columns: [
                                             {id: "no",             header: "No",          sort:"int",  autoIncrement: true,  width: 60},
-                                            {id: "kode_barang",    header: "Kode Barang", sort:"text", fillspace: 1},
+                                            {id: "kode_barang",    header: "Kode Barang", sort:"text", fillspace: 3},
                                             {id: "nama",           header: "Nama Barang", sort:"text", fillspace: 4},
                                             {id: "harga_beli",     header: "Harga Beli",  sort:"int",  fillspace: 2, css: "text_right", template: currencyHargaBeli},
                                             {id: "harga_jual",     header: "Harga Jual",  sort:"int",  fillspace: 2, css: "text_right", template: currencyHargaJual},
