@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 from pymongo import MongoClient
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -15,6 +16,8 @@ def index():
 
 @app.route("/riwayat")
 def riwayat_transaksi():
+    hapus_riwayat_transaksi_lama = hapus_transaksi_lama()
+    print("hallo", hapus_riwayat_transaksi_lama)
     return render_template('riwayat.html')
 
 @app.route("/barang")
@@ -154,7 +157,8 @@ def tambah_riwayat():
             'items': data['items'],
             'total': data['total'],
             'bayar': data['bayar'],
-            'kembalian': data['kembalian']
+            'kembalian': data['kembalian'],
+            'created': datetime.now()
         }
        
         collection_riwayat.insert_one(new_data_transaksi)
@@ -162,6 +166,17 @@ def tambah_riwayat():
     except Exception as e:
         print(jsonify({'status': 'error', 'message': str(e)}))
         return jsonify({'status': 'error', 'message': 'Gagal melakukan transaksi, silahkan coba lagi!'})
+
+def hapus_transaksi_lama():
+    try:
+        cutoff_date = datetime.now() - timedelta(days=60)
+        hasil = collection_riwayat.delete_many({'created': {'$lt': cutoff_date}})
+        print(hasil.deleted_count)
+        return jsonify({'status': 'success', 'message': 'Data transaksi lebih dari 2 bulan berhasil dihapus'})
+    except Exception as e:
+        print(jsonify({'status': 'error', 'message': str(e)}))
+        return jsonify({'status': 'error', 'message': 'Gagal menghapus data riwayat transaksi'})
+
 
 
 if __name__ == "__main__":

@@ -451,6 +451,8 @@ webix.ready(function(){
                                                                 gravity: 2, 
                                                                 editable: true,
                                                                 minWidth: 150,
+                                                               minDate: new Date(2024, 7, 1), // August 1, 2024
+            maxDate: new Date(2024, 7, 31), // August 31, 2024
                                                                 on: {                                            
                                                                     onChange: function() {filterDataRiwayat(this.getValue())}
                                                                 }
