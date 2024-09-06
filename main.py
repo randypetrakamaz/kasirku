@@ -155,9 +155,9 @@ def tambah_riwayat():
             'no_transaksi': data['no_transaksi'],
             'tanggal': data['tanggal'],
             'items': data['items'],
-            'total': data['total'],
-            'bayar': data['bayar'],
-            'kembalian': data['kembalian'],
+            'total': int(data['total']),
+            'bayar': int(data['bayar']),
+            'kembalian': int(data['kembalian']),
             'created': datetime.now()
         }
        
