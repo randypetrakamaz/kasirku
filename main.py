@@ -17,7 +17,6 @@ def index():
 @app.route("/riwayat")
 def riwayat_transaksi():
     hapus_riwayat_transaksi_lama = hapus_transaksi_lama()
-    print("hallo", hapus_riwayat_transaksi_lama)
     return render_template('riwayat.html')
 
 @app.route("/barang")
@@ -65,7 +64,7 @@ def tambah_barang():
         print({'status': 'error', 'message': str(e)})
         return jsonify({'status': 'error', 'message': 'Gagal menambahkan data barang'})
     
-@app.route('/barang/ubah-barang', methods=['POST'])
+@app.route('/barang/ubah-barang', methods=['PUT'])
 def ubah_barang():
     try:
         kode_barang = request.form['kode_barang']
@@ -75,20 +74,16 @@ def ubah_barang():
             'harga_jual': int(request.form['harga_jual']),
             'stok': int(request.form['stok'])
         }
-       
-        # Lakukan pembaruan data berdasarkan kode_barang
-        result = collection_barang.update_one({'kode_barang': kode_barang}, {'$set': updated_data})
-        
+        result = collection_barang.update_one({'kode_barang': kode_barang}, {'$set': updated_data})  
         if result.modified_count > 0:
             return jsonify({'status': 'success', 'message': 'Data barang berhasil diubah'})
         else:
             return jsonify({'status': 'error', 'message': 'Data dengan kode barang tersebut tidak ditemukan'})
-
     except Exception as e:
         print({'status': 'error', 'message': str(e)})
         return jsonify({'status': 'error', 'message': 'Gagal mengubah data barang'})
 
-@app.route('/barang/hapus-barang', methods=['POST'])
+@app.route('/barang/hapus-barang', methods=['DELETE'])
 def hapus_barang():
     try:
         kode_barang = request.form['kode_barang']  

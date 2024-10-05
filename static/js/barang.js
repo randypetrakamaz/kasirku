@@ -1,7 +1,7 @@
 let menu_data = [
-	{id: "dashboard", icon: "mdi mdi-cart-outline", width: 20, value: "Dashboards", link: "/"},
-	{id: "riwayat", icon: "mdi mdi-history", value: "Riwayat", link: "/riwayat"},
-	{id: "barang", icon: "mdi mdi-semantic-web", value: "Data Barang", link: "/barang"}
+    { id: "dashboard", icon: "mdi mdi-cart-outline", width: 20, value: "Dashboards", link: "/" },
+    { id: "riwayat", icon: "mdi mdi-history", value: "Riwayat", link: "/riwayat" },
+    { id: "barang", icon: "mdi mdi-semantic-web", value: "Data Barang", link: "/barang" }
 ];
 
 let format = webix.Date.dateToStr("%d/%M/%Y");
@@ -20,22 +20,22 @@ webix.event(window, "resize", function () {
     responsiveSidebar();
 });
 
-function clickToggleMenu(){
+function clickToggleMenu() {
     $$("sidebar_menu").toggle();
 }
 
-function switchMenu(id){
+function switchMenu(id) {
     let selectedMenu = this.getItem(id);
-    if(selectedMenu.id != "barang"){
+    if (selectedMenu.id != "barang") {
         window.location.href = selectedMenu.link;
     }
 }
 
-function showDateTime(){     
+function showDateTime() {
     webix.i18n.parseTimeFormat = "%H:%i";
     webix.i18n.setLocale();
 
-    setInterval(function(){
+    setInterval(function () {
         $$("current_time").refresh()
     }, 1000);
 
@@ -51,15 +51,15 @@ function formatCurrency(value) {
     });
 }
 
-function currencyHargaBeli(obj){ 
+function currencyHargaBeli(obj) {
     return formatCurrency(obj.harga_beli)
 }
 
-function currencyHargaJual(obj){ 
+function currencyHargaJual(obj) {
     return formatCurrency(obj.harga_jual)
 }
 
-function currencyStokBarang(obj){ 
+function currencyStokBarang(obj) {
     return formatCurrency(obj.stok)
 }
 
@@ -80,7 +80,7 @@ let modeAksiForm = "tambah"
 let windowTambahData = webix.ui({
     id: "windowData",
     view: "window",
-    
+
     height: 380,
     width: 400,
     padding: -50,
@@ -88,8 +88,8 @@ let windowTambahData = webix.ui({
     position: "center",
     close: true,
     move: true,
-    on: {onHide: function() {$$("form_data").clearValidation();}},
-    body:{
+    on: { onHide: function () { $$("form_data").clearValidation(); } },
+    body: {
         id: "form_data",
         view: "form",
         padding: 30,
@@ -103,41 +103,41 @@ let windowTambahData = webix.ui({
                         margin: 10,
                         rows: [
                             {
-                                id: "kode_barang", 
-                                view: "text", 
-                                label: "Kode barang", 
-                                name: "kode_barang", 
+                                id: "kode_barang",
+                                view: "text",
+                                label: "Kode barang",
+                                name: "kode_barang",
                                 on: {
-                                    onEnter: function(){changeFormatToUpperCase(this.getValue(), "kode_barang")},
-                                    onBlur: function(){changeFormatToUpperCase(this.getValue(), "kode_barang")},
+                                    onEnter: function () { changeFormatToUpperCase(this.getValue(), "kode_barang") },
+                                    onBlur: function () { changeFormatToUpperCase(this.getValue(), "kode_barang") },
                                 }
-                            }, 
-                            {id: "nama", view: "text", label: "Nama barang", name: "nama"},
-                            {id: "stok", view: "counter", label: "Stok", name: "stok", min: 1}
+                            },
+                            { id: "nama", view: "text", label: "Nama barang", name: "nama" },
+                            { id: "stok", view: "counter", label: "Stok", name: "stok", min: 1 }
                         ]
                     },
-                    {width: 30},
+                    { width: 30 },
                     {
-                        margin:10,
+                        margin: 10,
                         rows: [
                             {
                                 id: "harga_beli",
                                 view: "text",
-                                label: "Harga beli", 
-                                name: "harga_beli", 
+                                label: "Harga beli",
+                                name: "harga_beli",
                                 on: {
-                                    onEnter: function(){changeFormatCurrency("harga_beli")},
-                                    onBlur: function(){changeFormatCurrency("harga_beli")}
+                                    onEnter: function () { changeFormatCurrency("harga_beli") },
+                                    onBlur: function () { changeFormatCurrency("harga_beli") }
                                 }
                             },
                             {
                                 id: "harga_jual",
-                                view: "text", 
+                                view: "text",
                                 label: "Harga jual",
-                                name: "harga_jual", 
+                                name: "harga_jual",
                                 on: {
-                                    onEnter: function(){changeFormatCurrency("harga_jual")},
-                                    onBlur: function(){changeFormatCurrency("harga_jual")}
+                                    onEnter: function () { changeFormatCurrency("harga_jual") },
+                                    onBlur: function () { changeFormatCurrency("harga_jual") }
                                 }
                             }
                         ]
@@ -149,72 +149,72 @@ let windowTambahData = webix.ui({
                 view: "button",
                 value: "tambah",
                 mode: "tambah",
-                css:"webix_primary", 
-                click: function() {btnFormManipulation(this.config.mode)}
+                css: "webix_primary",
+                click: function () { btnFormManipulation(this.config.mode) }
             }
         ],
-        rules:{
-            "kode_barang":webix.rules.isNotEmpty,
-            "nama":webix.rules.isNotEmpty,
-            "stok":webix.rules.isNotEmpty,
-            "harga_beli":webix.rules.isNotEmpty,
-            "harga_jual":webix.rules.isNotEmpty
+        rules: {
+            "kode_barang": webix.rules.isNotEmpty,
+            "nama": webix.rules.isNotEmpty,
+            "stok": webix.rules.isNotEmpty,
+            "harga_beli": webix.rules.isNotEmpty,
+            "harga_jual": webix.rules.isNotEmpty
         },
-        elementsConfig:{
-            labelPosition:"top"
+        elementsConfig: {
+            labelPosition: "top"
         }
     }
 })
 
 function btnFormManipulation(mode) {
-    if($$("form_data").validate()) {
-        data = $$("form_data").getValues()   
+    if ($$("form_data").validate()) {
+        data = $$("form_data").getValues()
         // data["kode_barang"] = data["kode_barang"].toUpperCase();
         data["harga_beli"] = data["harga_beli"].replace(/\./g, '');
         data["harga_jual"] = data["harga_jual"].replace(/\./g, '');
 
-        if(parseInt(data["harga_beli"]) >= parseInt(data["harga_jual"])){
-            webix.message({type: "error", text: "Harga beli tidak boleh lebih besar atau sama dengan harga jual"});
+        if (parseInt(data["harga_beli"]) >= parseInt(data["harga_jual"])) {
+            webix.message({ type: "error", text: "Harga beli tidak boleh lebih besar atau sama dengan harga jual" });
             return false
-        } 
-        
-        if(mode === "tambah") {
+        }
+
+        if (mode === "tambah") {
             webix.ajax().post('/barang/tambah-barang', data, function (text) {
                 windowTambahData.hide()
                 let result = JSON.parse(text);
                 let message = result.message;
 
                 if (result.status === 'success') {
-                    webix.message({type: "success", text: message});
+                    webix.message({ type: "success", text: message });
                     window.location.href = '/barang';
-                } else {                    
+                } else {
                     webix.alert({
-                        type:"alert-error",
-                        title:"Tambah Data Barang",
+                        type: "alert-error",
+                        title: "Tambah Data Barang",
                         text: message
                     })
                 }
             })
-        } else if(mode === "ubah") {
-            webix.ajax().post('/barang/ubah-barang', data, function (text) {
+        } else if (mode === "ubah") {
+            webix.ajax().put('/barang/ubah-barang', data, function (text) {
                 windowTambahData.hide()
                 let result = JSON.parse(text);
                 let message = result.message;
 
                 if (result.status === 'success') {
-                    webix.message({type: "success", text: message});
+                    webix.message({ type: "success", text: message });
                     window.location.href = '/barang';
                 } else {
                     webix.alert({
-                        type:"alert-error",
-                        title:"Ubah Data Barang",
+                        type: "alert-error",
+                        title: "Ubah Data Barang",
                         text: message
                     })
                 }
             })
         }
     } else {
-        webix.message({type: "error", text: "Data tidak boleh kosong!"});
+        webix.message({ type: "error", text: "Data tidak boleh kosong!" });
     }
 }
 
@@ -233,7 +233,7 @@ function addDataBtn() {
 function editDataBtn() {
     let selectedItem = $$("table_items").getSelectedItem();
     if (selectedItem) {
-        $$("form_data").setValues(selectedItem);                                                
+        $$("form_data").setValues(selectedItem);
         $$("windowData").getHead().getChildViews()[0].setHTML("Edit Data");
         $$("btn_form").define("label", "Ubah");
         $$("btn_form").define("mode", "ubah");
@@ -242,7 +242,7 @@ function editDataBtn() {
         $$("btn_form").refresh();
         windowTambahData.show();
     } else {
-        webix.message({type: "info", text: "Pilih baris data untuk diedit!"});
+        webix.message({ type: "info", text: "Pilih baris data untuk diedit!" });
     }
 }
 
@@ -251,34 +251,34 @@ function deleteDataBtn() {
     if (selectedId) {
         webix.confirm({
             title: "Konfirmasi Hapus Data",
-            type:"confirm-warning",
-            ok: "Hapus", 
+            type: "confirm-warning",
+            ok: "Hapus",
             cancel: "Batal",
             text: "Apakah anda yakin untuk menghapus data ini?"
-        }).then(function(result){
+        }).then(function (result) {
             let dataBarang = $$("table_items").getItem(selectedId);
             let dictKodeBarang = {
                 "kode_barang": dataBarang.kode_barang
             }
 
-            webix.ajax().post('/barang/hapus-barang', dictKodeBarang, function (text) {
+            webix.ajax().del('/barang/hapus-barang', dictKodeBarang, function (text) {
                 let result = JSON.parse(text);
                 let message = result.message;
 
                 if (result.status === 'success') {
-                    webix.message({type: "success", text: message});
+                    webix.message({ type: "success", text: message });
                     window.location.href = '/barang';
                 } else {
                     webix.alert({
-                        type:"alert-error",
-                        title:"Hapus Data Barang",
+                        type: "alert-error",
+                        title: "Hapus Data Barang",
                         text: message
                     })
                 }
             })
         })
     } else {
-        webix.message({type: "info", text: "Pilih baris untuk dihapus"});
+        webix.message({ type: "info", text: "Pilih baris untuk dihapus" });
     }
 }
 
@@ -287,7 +287,7 @@ function filterStok(stok) {
     let inputText = $$("filter_table").getValue().toString().toLowerCase();
     let tabelBarang = $$("table_items");
 
-    tabelBarang.filter(function(obj){
+    tabelBarang.filter(function (obj) {
         if (inputStok !== "") {
             if (inputText !== "") {
                 let filter = [obj.nama, obj.kode_barang].join("|");
@@ -306,7 +306,7 @@ function filterStok(stok) {
     webix.extend(tabelBarang, webix.OverlayBox);
     tabelBarang.hideOverlay();
 
-    if(tabelBarang.count() === 0) {
+    if (tabelBarang.count() === 0) {
         tabelBarang.showOverlay("Tidak ada data");
     }
 }
@@ -315,8 +315,8 @@ function filterData(data) {
     let text = data.toString().toLowerCase();
     let inputStok = $$("filter_stok").getValue();
     let tabelBarang = $$("table_items");
-    
-    tabelBarang.filter(function(obj){
+
+    tabelBarang.filter(function (obj) {
         if (text !== "") {
             let filter = [obj.nama, obj.kode_barang].join("|");
             if (inputStok != "") {
@@ -324,7 +324,7 @@ function filterData(data) {
             } else {
                 return filter.toString().toLowerCase().indexOf(text) != -1;
             }
-        } else if(text == "" && inputStok != "") {
+        } else if (text == "" && inputStok != "") {
             return obj.stok < inputStok
         } else {
             return true;
@@ -334,26 +334,26 @@ function filterData(data) {
     webix.extend(tabelBarang, webix.OverlayBox)
     tabelBarang.hideOverlay();
 
-    if(tabelBarang.count() === 0) {
+    if (tabelBarang.count() === 0) {
         tabelBarang.showOverlay("Tidak ada data");
     }
 }
 
 
 
-webix.ready(function() {
+webix.ready(function () {
     // webix.ui.fullScreen();
     webix.ui({
         rows: [
             // =====> Header <=====
             {
                 id: "header",
-                view: "toolbar", 
-                padding: 10,  
+                view: "toolbar",
+                padding: 10,
                 css: "bg_blue",
                 elements: [
-                    {id: "iconMenu", view: "icon", icon: "mdi mdi-menu", width: 40, css: "icon_hamburger", click: clickToggleMenu},
-                    {id: "appName", view: "label", label: "KasirKu", css: "header_title"}
+                    { id: "iconMenu", view: "icon", icon: "mdi mdi-menu", width: 40, css: "icon_hamburger", click: clickToggleMenu },
+                    { id: "appName", view: "label", label: "KasirKu", css: "header_title" }
                 ]
             },
             // =====> Body <=====
@@ -361,17 +361,19 @@ webix.ready(function() {
                 cols: [
                     // =====> Sidebar Menu <=====
                     {
-                        id: "sidebar_menu", 
-                        view: "sidebar", 
+                        id: "sidebar_menu",
+                        view: "sidebar",
                         border: true,
-                        width: 200, 
+                        width: 200,
                         titleHeight: 63,
-                        collapsedWidth: 62, 
+                        collapsedWidth: 62,
                         css: "sidebar_custom ",
-                        data: menu_data, 
-                        on: {onAfterSelect: switchMenu, onMouseMove: function(id) {
-                              this.getPopup().hide()
-                            }}
+                        data: menu_data,
+                        on: {
+                            onAfterSelect: switchMenu, onMouseMove: function (id) {
+                                this.getPopup().hide()
+                            }
+                        }
                     },
                     {
                         borderless: true,
@@ -379,11 +381,11 @@ webix.ready(function() {
                         rows: [
                             // =====> Menu Name & Datetime <===== (belum responsive di width screen 650)
                             {
-                                minHeight: 60, 
+                                minHeight: 60,
                                 css: "bg_gray",
                                 cols: [
-                                    {id: "label_menu", view: "label", label: "MENU DATA BARANG", css: "custom_header_menu"},
-                                    {id:"current_time", template: showDateTime, type: "clean", css: "text_right custom_header_time"}
+                                    { id: "label_menu", view: "label", label: "MENU DATA BARANG", css: "custom_header_menu" },
+                                    { id: "current_time", template: showDateTime, type: "clean", css: "text_right custom_header_time" }
                                 ]
                             },
                             // ubah dari sini
@@ -391,7 +393,7 @@ webix.ready(function() {
                                 rows: [
                                     {
                                         id: "toolbar_filter",
-                                        view: "toolbar",                      
+                                        view: "toolbar",
                                         maxHeight: 50,
                                         paddingX: 10,
                                         paddingY: 15,
@@ -404,27 +406,27 @@ webix.ready(function() {
                                                         minWidth: 300,
                                                         cols: [
                                                             {
-                                                                id:"filter_table", 
-                                                                view:"text",
-                                                                label:"Cari Data",
-                                                                placeholder:"Kode dan nama barang", 
-                                                                labelPosition: "top", 
+                                                                id: "filter_table",
+                                                                view: "text",
+                                                                label: "Cari Data",
+                                                                placeholder: "Kode dan nama barang",
+                                                                labelPosition: "top",
                                                                 minWidth: 180,
                                                                 on: {
                                                                     // onTimedKeyPress: function(){filterData(this.getValue())}
-                                                                    onEnter: function(){filterData(this.getValue())}
+                                                                    onEnter: function () { filterData(this.getValue()) }
                                                                 }
                                                             },
                                                             {
-                                                                id:"filter_stok", 
-                                                                view:"text", 
-                                                                type: "number", 
-                                                                label: "Filter Stok", 
-                                                                placeholder:"Stok kurang dari", 
-                                                                labelPosition: "top", 
+                                                                id: "filter_stok",
+                                                                view: "text",
+                                                                type: "number",
+                                                                label: "Filter Stok",
+                                                                placeholder: "Stok kurang dari",
+                                                                labelPosition: "top",
                                                                 minWidth: 145,
                                                                 on: {
-                                                                    onEnter: function(){filterStok(this.getValue())}
+                                                                    onEnter: function () { filterStok(this.getValue()) }
                                                                     // onTimedKeyPress: function(){filterStok(this.getValue())}
                                                                 },
                                                             }
@@ -432,23 +434,23 @@ webix.ready(function() {
                                                     },
                                                     {
                                                         minWidth: 300,
-                                                        maxHeight: 90, 
-                                                        margin: 10, 
+                                                        maxHeight: 90,
+                                                        margin: 10,
                                                         cols: [
                                                             {},
                                                             {
                                                                 rows: [
                                                                     {},
-                                                                    { 
+                                                                    {
                                                                         id: "add_btn",
-                                                                        view:"button", 
-                                                                        type:"icon", 
-                                                                        icon: "mdi mdi-plus", 
-                                                                        label: "Tambah", 
-                                                                        width: 100, 
+                                                                        view: "button",
+                                                                        type: "icon",
+                                                                        icon: "mdi mdi-plus",
+                                                                        label: "Tambah",
+                                                                        width: 100,
                                                                         height: 50,
-                                                                        align: "center", 
-                                                                        css: "webix_primary", 
+                                                                        align: "center",
+                                                                        css: "webix_primary",
                                                                         click: addDataBtn
                                                                     },
                                                                 ]
@@ -456,17 +458,17 @@ webix.ready(function() {
                                                             {
                                                                 rows: [
                                                                     {},
-                                                                    { 
+                                                                    {
                                                                         id: "edit_btn",
-                                                                        view:"button", 
-                                                                        type:"icon", 
-                                                                        icon: "mdi mdi-pencil", 
-                                                                        label: "Ubah", 
+                                                                        view: "button",
+                                                                        type: "icon",
+                                                                        icon: "mdi mdi-pencil",
+                                                                        label: "Ubah",
                                                                         value: "edit",
-                                                                        width: 100, 
+                                                                        width: 100,
                                                                         height: 50,
-                                                                        align: "center", 
-                                                                        css: "webix_secondary", 
+                                                                        align: "center",
+                                                                        css: "webix_secondary",
                                                                         click: editDataBtn,
                                                                     },
                                                                 ]
@@ -474,16 +476,16 @@ webix.ready(function() {
                                                             {
                                                                 rows: [
                                                                     {},
-                                                                    { 
+                                                                    {
                                                                         id: "delete_btn",
-                                                                        view:"button", 
-                                                                        type:"icon", 
-                                                                        icon: "mdi mdi-delete", 
-                                                                        label: "Hapus", 
-                                                                        width: 100, 
+                                                                        view: "button",
+                                                                        type: "icon",
+                                                                        icon: "mdi mdi-delete",
+                                                                        label: "Hapus",
+                                                                        width: 100,
                                                                         height: 50,
-                                                                        align: "center", 
-                                                                        css: "webix_danger", 
+                                                                        align: "center",
+                                                                        css: "webix_danger",
                                                                         click: deleteDataBtn,
                                                                     },
                                                                 ]
@@ -499,15 +501,15 @@ webix.ready(function() {
                                         view: "datatable",
                                         css: "webix_header_border webix_data_border",
                                         columns: [
-                                            {id: "no",             header: "No",          sort:"int",  autoIncrement: true,  width: 60},
-                                            {id: "kode_barang",    header: "Kode Barang", sort:"text", fillspace: 3},
-                                            {id: "nama",           header: "Nama Barang", sort:"text", fillspace: 4},
-                                            {id: "harga_beli",     header: "Harga Beli",  sort:"int",  fillspace: 2, css: "text_right", template: currencyHargaBeli},
-                                            {id: "harga_jual",     header: "Harga Jual",  sort:"int",  fillspace: 2, css: "text_right", template: currencyHargaJual},
-                                            {id: "stok",           header: "Stok",        sort:"int",  fillspace: 2, css: "text_right", template: currencyStokBarang}
+                                            { id: "no", header: "No", sort: "int", autoIncrement: true, width: 60 },
+                                            { id: "kode_barang", header: "Kode Barang", sort: "text", fillspace: 3 },
+                                            { id: "nama", header: "Nama Barang", sort: "text", fillspace: 4 },
+                                            { id: "harga_beli", header: "Harga Beli", sort: "int", fillspace: 2, css: "text_right", template: currencyHargaBeli },
+                                            { id: "harga_jual", header: "Harga Jual", sort: "int", fillspace: 2, css: "text_right", template: currencyHargaJual },
+                                            { id: "stok", header: "Stok", sort: "int", fillspace: 2, css: "text_right", template: currencyStokBarang }
                                         ],
                                         scheme: {
-                                            $init: function(obj) {
+                                            $init: function (obj) {
                                                 obj.no = this.count();
                                             }
                                         },
@@ -517,7 +519,7 @@ webix.ready(function() {
                                         select: true,
                                         scroll: "y",
                                         onClick: {
-                                            "wxi-trash": function(event, id, node){
+                                            "wxi-trash": function (event, id, node) {
                                                 this.remove(id)
                                             }
                                         }
@@ -529,9 +531,9 @@ webix.ready(function() {
                 ]
             }
         ]
-    })       
+    })
 
-    $$("sidebar_menu").select("barang");  
+    $$("sidebar_menu").select("barang");
     responsiveSidebar();
     webix.message.expire = 1800;
 })
